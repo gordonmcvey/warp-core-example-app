@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <!--    Controllers have to be given the ID that corresponds to their class name otherwise the factory can't find them-->
+    <services>
+        <defaults autoconfigure="true" autowire="true"/>
+
+        <service id="gordonmcvey\exampleapp\controller\Health\EchoPayload" class="gordonmcvey\exampleapp\controller\Health\EchoPayload"/>
+        <service id="gordonmcvey\exampleapp\controller\Health\Ping" class="gordonmcvey\exampleapp\controller\Health\Ping">
+            <call method="addMiddleware">
+                <argument type="service" id="ProcessedTime" />
+            </call>
+        </service>
+
+    </services>
+</container>

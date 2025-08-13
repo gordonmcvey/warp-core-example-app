@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <defaults autoconfigure="true" autowire="true"/>
+
+        <service id="ResponseSenderInterface" class="gordonmcvey\httpsupport\response\sender\ResponseSender" />
+        <service id="StatusCodeFactory" class="gordonmcvey\httpsupport\enum\factory\StatusCodeFactory" />
+
+        <service id="ErrorHandlerInterface" class="gordonmcvey\WarpCore\error\JsonErrorHandler">
+            <argument type="service" id="StatusCodeFactory" />
+            <argument type="constant">JSON_PRETTY_PRINT</argument>
+            <argument type="constant">true</argument>
+        </service>
+
+        <service id="ShutdownHandler" class="gordonmcvey\WarpCore\ShutdownHandler">
+            <argument type="service" id="ResponseSenderInterface" />
+            <argument type="service" id="ErrorHandlerInterface" />
+        </service>
+    </services>
+</container>

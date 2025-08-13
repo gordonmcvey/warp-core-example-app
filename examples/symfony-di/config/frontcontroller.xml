@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <defaults autoconfigure="true" autowire="true"/>
+
+        <service id="CallStackFactory" class="gordonmcvey\WarpCore\middleware\CallStackFactory" />
+
+        <service id="PayloadHandlerInterface" class="gordonmcvey\httpsupport\request\payload\JsonPayloadHandler"/>
+
+        <service id="ControllerFactoryInterface" class="gordonmcvey\exampleapp\factory\DiControllerFactory">
+            <argument type="service" id="containerObject" />
+        </service>
+
+        <service id="Bootstrap" class="gordonmcvey\WarpCore\Bootstrap">
+            <argument type="service" id="RouterInterface" />
+            <argument type="service" id="ControllerFactoryInterface" />
+        </service>
+
+        <service id="FrontController" class="gordonmcvey\WarpCore\FrontController">
+            <argument type="service" id="CallStackFactory" />
+            <argument type="service" id="ErrorHandlerInterface" />
+            <argument type="service" id="ResponseSenderInterface" />
+            <call method="addMiddleware">
+                <argument type="service" id="RequestMeta" />
+            </call>
+        </service>
+    </services>
+</container>
