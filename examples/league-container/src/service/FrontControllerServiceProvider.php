@@ -13,7 +13,7 @@ use gordonmcvey\WarpCore\interface\routing\RouterInterface;
 use gordonmcvey\WarpCore\middleware\CallStackFactory;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 
-class JapiServiceProvider extends AbstractServiceProvider
+class FrontControllerServiceProvider extends AbstractServiceProvider
 {
     private const array PROVIDED = [
         Bootstrap::class,

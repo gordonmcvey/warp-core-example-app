@@ -7,7 +7,7 @@ $received = new DateTimeImmutable();
 use gordonmcvey\exampleapp\service\ControllerServiceProvider;
 use gordonmcvey\exampleapp\service\EnvServiceProvider;
 use gordonmcvey\exampleapp\service\ErrorHandlerServiceProvider;
-use gordonmcvey\exampleapp\service\JapiServiceProvider;
+use gordonmcvey\exampleapp\service\FrontControllerServiceProvider;
 use gordonmcvey\exampleapp\service\MiddlewareServiceProvider;
 use gordonmcvey\exampleapp\service\RouterServiceProvider;
 use gordonmcvey\httpsupport\interface\response\ResponseSenderInterface;
@@ -47,7 +47,7 @@ $container
     ->addServiceProvider(new MiddlewareServiceProvider())
     ->addServiceProvider(new ControllerServiceProvider())
     ->addServiceProvider(new RouterServiceProvider())
-    ->addServiceProvider(new JapiServiceProvider())
+    ->addServiceProvider(new FrontControllerServiceProvider())
     ->get(FrontController::class)
     ->bootstrap(
         $container->get(Bootstrap::class),

@@ -52,7 +52,7 @@ return [
         ->constructor(DI\env("APP_CONTROLLER_NAMESPACE_ROOT")),
     RouterInterface::class            => DI\create(Router::class)
         ->constructor(DI\get(RoutingStrategyInterface::class)),
-    // JAPI
+    // Front Controller
     Bootstrap::class                  => DI\create(Bootstrap::class)
         ->constructor(
             DI\get(RouterInterface::class),

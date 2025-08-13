@@ -1,6 +1,6 @@
 {
-  "name": "gordonmcvey/japi-example-app",
-  "description": "description",
+  "name": "gordonmcvey/warpcore-example-app-league",
+  "description": "Warp Core example application (using League Container for dependency injection)",
   "license": "apache",
   "authors": [
     {

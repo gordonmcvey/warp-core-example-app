@@ -1,6 +1,6 @@
 {
-  "name": "gordonmcvey/japi-example-app",
-  "description": "description",
+  "name": "gordonmcvey/warpcore-example-app-vanilla",
+  "description": "Warp Core example application (with no DI container, all dependency injections are managed manually)",
   "license": "apache",
   "authors": [
     {

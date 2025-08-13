@@ -1,6 +1,6 @@
 {
-  "name": "gordonmcvey/japi-example-app",
-  "description": "description",
+  "name": "gordonmcvey/warpcore-example-app-php-di",
+  "description": "Warp Core example application (using PHP-DI for dependency injection)",
   "license": "apache",
   "authors": [
     {
