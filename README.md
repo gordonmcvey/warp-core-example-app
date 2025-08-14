@@ -1,6 +1,6 @@
 # Warp Core Example Apps
 
-This is a collection of simple applications for the Warp Core microframework.  They can be used to serve as examples of how to work with Warp Core, or as skeleton apps to serve as the foundation of a full Warp Core application.
+This is a collection of simple applications for the [Warp Core microframework](https://github.com/gordonmcvey/warp-core-php).  They can be used to serve as examples of how to work with Warp Core, or as skeleton apps to serve as the foundation of a full Warp Core application.
 
 ## Running
 
@@ -8,7 +8,7 @@ You can run these applications directly from PHP's built-in web server (recommen
 
 ### Running with PHP's web server
 
-Once you've cloned the repo, CD into one of the sub-directories under `/examples` (for example `/examples/vanilla`).  Then configure, install dependencies, and run the PHP server from the `/public` subdirectory:
+Once you've cloned the repo, `cd` into one of the sub-directories under `/examples` (for example `/examples/vanilla`).  Then configure, install dependencies, and run the PHP server from the `/public` subdirectory:
 
 Setting up the environment is simply a matter of copying the `.env.example.*` file you wish to use as the basis of your config to `.env`.
 
@@ -30,6 +30,10 @@ cd ./public
 php -S localhost:8000
 ```
 
+### Running from a web server
+
+The specifics of running Warp Core from a web server such as Apache or Nginx will depend on the specific setup you want to run the application under.  Generally though, you'd want to make `public` your document root directory, and have all incoming requests (that don't correspond to a static file) to `index.php`.  The `src` and `vendor` subdirectories should remain outside the document root and inaccessible from the outside.  
+
 ### Running from Docker
 
 Coming soon
@@ -40,7 +44,7 @@ I've provided a number of example applications, all of which do the same thing, 
 
 The provided examples include: 
 
-* `vanilla`: This is a vanilla implementation that doesn't use a DI container at all, and where all dependencies are manually injected.  Should you want to implement DI using some mechanism other than the ones demonstrated in the other examples, this would be a good place to start.  
+* `vanilla`: This is a vanilla implementation that doesn't use a DI container at all; all dependencies are manually injected.  Should you want to implement DI using some mechanism other than the ones demonstrated in the other examples, this would be a good place to start.
 * `league-container`: Automatic DI managed with the [League DI container](https://container.thephpleague.com/)
 * `php-di:` Automatic DI managed with the [PHP-DI container](https://php-di.org/)
 * `symfony-di`: Automatic DI managed with the [Symfony DI container](https://symfony.com/doc/current/components/dependency_injection.html) component
