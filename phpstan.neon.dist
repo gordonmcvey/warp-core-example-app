@@ -1,0 +1,17 @@
+parameters:
+	phpVersion: 80300
+	level: 7
+	scanDirectories:
+	    - ./examples/league-container/vendor
+	    - ./examples/php-di/vendor
+	    - ./examples/symfony-di/vendor
+	    - ./examples/vanilla/vendor
+	paths:
+		- ./examples/league-container/public
+		- ./examples/league-container/src
+		- ./examples/php-di/public
+		- ./examples/php-di/src
+		- ./examples/symfony-di/public
+		- ./examples/symfony-di/src
+		- ./examples/vanilla/public
+		- ./examples/vanilla/src

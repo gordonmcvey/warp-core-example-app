@@ -1,0 +1,9 @@
+path:
+  - examples/league-container
+  - examples/php-di
+  - examples/symfony-di
+  - examples/vanilla
+extensions:
+  - php
+exclude:
+  - vendor
