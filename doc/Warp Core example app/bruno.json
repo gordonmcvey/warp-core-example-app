@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Warp Core example app",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

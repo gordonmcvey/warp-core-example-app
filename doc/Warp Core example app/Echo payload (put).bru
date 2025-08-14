@@ -1,0 +1,89 @@
+meta {
+  name: Echo payload (put)
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://{{host}}/health/echo-payload
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "foo": "bar",
+    "baz": "quux"
+  }
+}
+
+docs {
+  # Echo Payload endpoint
+  
+  This endpoint takes whatever JSON it finds in the request body and echos it back.  This is useful for diagnosing issues that may be caused by network issues, character encoding issues, etc.  
+  
+  ## Request
+  
+  ### Supported methods
+  
+  `POST`, `PUT`
+  
+  ### Request parameters
+  
+  None
+  
+  ### Request body
+  
+  Any valid JSON payload
+  
+  ## Example Responses
+  
+  ### Typical response
+  
+  Using the following request body:
+  
+  ```json
+  {
+    "foo": "bar",
+    "baz": "quux"
+  }
+  ```
+  
+  Expected response
+  
+  ```json
+  {
+    "requestId": "68683bdfe0e6f8.06845695",
+    "received": "2025-07-04T20:38:55.920543+00:00",
+    "payload": {
+      "foo": "bar",
+      "baz": "quux"
+    }
+  }
+  ```
+  
+  ### Response for invalid request body
+  
+  ```json
+  {
+    "code": 400,
+    "msg": "Exception",
+    "detail": "gordonmcvey\\WarpCore\\Exceptions\\Routing: Payload is not valid JSON",
+    "file": "/src/controller/Health/EchoPayload.php",
+    "line": 38
+  }
+  ```
+  
+  ### Response for disallowed HTTP method
+  
+  ```json
+  {
+    "code": 405,
+    "msg": "Exception",
+    "detail": "gordonmcvey\\WarpCore\\Exceptions\\Routing: Method not allowed",
+    "file": "/src/controller/Health/EchoPayload.php",
+    "line": 32
+  }
+  ```
+  
+}

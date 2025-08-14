@@ -1,0 +1,59 @@
+meta {
+  name: Ping
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://{{host}}/health/ping
+  body: none
+  auth: inherit
+}
+
+docs {
+  # Ping endpoint
+  
+  This endpoint allows for a simple pinging of the API with no side-effects.  It includes enough information in the response body to determine how long the system is taking to process the request and generate the response
+  
+  Note, this will always be slightly less time than the full end-to-end request/response time, as the time to actually send the response can't be included in the response!
+  
+  ## Request
+  
+  ### Supported methods
+  
+  `GET`, `HEAD`
+  
+  ### Request parameters
+  
+  None
+  
+  ### Request body
+  
+  None
+  
+  ## Example Responses
+  
+  ### Typical response
+  
+  ```json
+  {
+    "requestId": "6867f796c73905.86352159",
+    "healthy": true,
+    "received": "2025-07-04T15:47:34.815883+00:00",
+    "processed": "2025-07-04T15:47:34.816223+00:00"
+  }
+  ```
+  
+  ### Method not allowed
+  
+  ```json
+  {
+    "code": 405,
+    "msg": "Exception",
+    "detail": "gordonmcvey\\WarpCore\\Exceptions\\Routing: Method not allowed",
+    "file": "/src/controller/Health/Ping.php",
+    "line": 30
+  }
+  ```
+  
+}
