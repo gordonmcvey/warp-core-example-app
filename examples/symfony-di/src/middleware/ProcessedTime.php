@@ -39,7 +39,7 @@ readonly final class ProcessedTime implements MiddlewareInterface
         $response = $handler->dispatch($request);
         $responseBody = (object) json_decode(json: $response->body(), flags: JSON_THROW_ON_ERROR);
         $responseBody->processed = (new DateTimeImmutable())->format(self::TIMESTAMP_FORMAT);
-        $response->setBody(json_encode($responseBody));
+        $response->setBody((string) json_encode($responseBody));
 
         return $response;
     }

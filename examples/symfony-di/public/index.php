@@ -33,10 +33,10 @@ $dotenv = Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->load();
 
 $dotenv->ifPresent("ERROR_REPORTING")->isInteger();
-error_reporting(((int) $_ENV["ERROR_REPORTING"]) ?? 0);
+error_reporting((int) $_ENV["ERROR_REPORTING"]);
 
 $dotenv->ifPresent("DISPLAY_ERRORS");
-ini_set("display_errors", ((string) $_ENV["DISPLAY_ERRORS"]) ?? "");
+ini_set("display_errors", (string) $_ENV["DISPLAY_ERRORS"]);
 
 $dotenv->ifPresent("DISPLAY_STARTUP_ERRORS")->isBoolean();
 ini_set("display_startup_errors", (bool) $_ENV["DISPLAY_STARTUP_ERRORS"]);
@@ -48,6 +48,7 @@ $container = new ContainerBuilder();
 $fileLoader = new XmlFileLoader($container, new FileLocator(__DIR__ . "/../config/"));
 $fileLoader->load("errorhandler.xml");
 
+// @phpstan-ignore argument.type (DI container doesn't specify specific return types)
 register_shutdown_function($container->get("ShutdownHandler"));
 
 $container->set("received", $received);
@@ -58,9 +59,11 @@ $fileLoader->load("controllers.xml");
 $fileLoader->load("routing.xml");
 $fileLoader->load("frontcontroller.xml");
 
-$container->get("FrontController")
-    ->bootstrap(
-        $container->get("Bootstrap"),
-        Request::fromSuperGlobals($container->get("PayloadHandlerInterface")),
-    )
-;
+/** @var \gordonmcvey\WarpCore\FrontController $frontController */
+$frontController = $container->get("FrontController");
+$frontController->bootstrap(
+    // @phpstan-ignore argument.type (DI container doesn't specify specific return types)
+    $container->get("Bootstrap"),
+    // @phpstan-ignore argument.type (DI container doesn't specify specific return types)
+    Request::fromSuperGlobals($container->get("PayloadHandlerInterface")),
+);

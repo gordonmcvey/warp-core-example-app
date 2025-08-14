@@ -38,7 +38,6 @@ class DiControllerFactory extends ControllerFactory
         $checkedPath = $this->checkControllerExists($path);
         $controller = $this->container->get($checkedPath);
         return $this->checkIsController($controller, $checkedPath);
-
     }
 
     /**

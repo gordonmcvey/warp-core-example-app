@@ -41,8 +41,8 @@ $dotenv->ifPresent("DISPLAY_STARTUP_ERRORS")->isBoolean();
 $dotenv->ifPresent("ERROR_REPORTING")->isInteger();
 $dotenv->ifPresent("PRETTY_PRINT_JSON")->isBoolean();
 
-error_reporting(((int) $_ENV["ERROR_REPORTING"]) ?? 0);
-ini_set("display_errors", ((string) $_ENV["DISPLAY_ERRORS"]) ?? "");
+error_reporting((int) $_ENV["ERROR_REPORTING"]);
+ini_set("display_errors", (string) $_ENV["DISPLAY_ERRORS"]);
 ini_set("display_startup_errors", (bool) $_ENV["DISPLAY_STARTUP_ERRORS"]);
 set_error_handler(new errorToException(), E_ERROR ^ E_USER_ERROR ^ E_COMPILE_ERROR);
 

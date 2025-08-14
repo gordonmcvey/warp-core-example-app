@@ -21,7 +21,7 @@ declare(strict_types=1);
 $received = new DateTimeImmutable();
 
 use Dotenv\Dotenv;
-use gordonmcvey\exampleapp\controller\health\Ping;
+use gordonmcvey\exampleapp\controller\Health\Ping;
 use gordonmcvey\exampleapp\middleware\ProcessedTime;
 use gordonmcvey\exampleapp\middleware\RequestMeta;
 use gordonmcvey\httpsupport\enum\factory\StatusCodeFactory;
@@ -45,10 +45,10 @@ $dotenv = Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->load();
 
 $dotenv->ifPresent("ERROR_REPORTING")->isInteger();
-error_reporting(((int) $_ENV["ERROR_REPORTING"]) ?? 0);
+error_reporting((int) $_ENV["ERROR_REPORTING"]);
 
 $dotenv->ifPresent("DISPLAY_ERRORS");
-ini_set("display_errors", ((string) $_ENV["DISPLAY_ERRORS"]) ?? "");
+ini_set("display_errors", (string) $_ENV["DISPLAY_ERRORS"]);
 
 $dotenv->ifPresent("DISPLAY_STARTUP_ERRORS")->isBoolean();
 ini_set("display_startup_errors", (bool) $_ENV["DISPLAY_STARTUP_ERRORS"]);

@@ -68,9 +68,9 @@ class EnvServiceProvider extends AbstractServiceProvider implements BootableServ
     {
         $this->container->add(self::APP_CONTROLLER_NAMESPACE_ROOT, $_ENV[self::APP_CONTROLLER_NAMESPACE_ROOT]);
         $this->container->add(self::DETAILED_ERROR_OUTPUT, (bool) $_ENV[self::DETAILED_ERROR_OUTPUT]);
-        $this->container->add(self::DISPLAY_ERRORS, ((string) $_ENV[self::DISPLAY_ERRORS]) ?? "");
+        $this->container->add(self::DISPLAY_ERRORS, (string) $_ENV[self::DISPLAY_ERRORS]);
         $this->container->add(self::DISPLAY_STARTUP_ERRORS, (bool) $_ENV[self::DISPLAY_STARTUP_ERRORS]);
-        $this->container->add(self::ERROR_REPORTING,((int) $_ENV[self::ERROR_REPORTING]) ?? 0);
+        $this->container->add(self::ERROR_REPORTING, (int) $_ENV[self::ERROR_REPORTING]);
         $this->container->add(
             self::PRETTY_PRINT_JSON,
             ((bool) $_ENV[self::PRETTY_PRINT_JSON]) ? JSON_PRETTY_PRINT : 0,

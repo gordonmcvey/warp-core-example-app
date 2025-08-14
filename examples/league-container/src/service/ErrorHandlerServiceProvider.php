@@ -25,7 +25,7 @@ use gordonmcvey\WarpCore\error\JsonErrorHandler;
 use gordonmcvey\WarpCore\interface\error\ErrorHandlerInterface;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 
-class ErrorHandlerServiceProvider  extends AbstractServiceProvider
+class ErrorHandlerServiceProvider extends AbstractServiceProvider
 {
     private const array PROVIDED = [
         ErrorHandlerInterface::class,

@@ -41,7 +41,7 @@ final class Ping implements RequestHandlerInterface, MiddlewareProviderInterface
         Verbs::HEAD,
     ];
 
-    public function dispatch(RequestInterface $request): ?ResponseInterface
+    public function dispatch(RequestInterface $request): ResponseInterface
     {
         if (!in_array($request->verb(), self::ALLOWED_METHODS)) {
             // @todo We need more exception types

@@ -46,8 +46,10 @@ class FrontControllerServiceProvider extends AbstractServiceProvider
 
     public function register(): void
     {
-        $this->container->add(ControllerFactoryInterface::class, DiControllerFactory::class)->addArgument($this->container);
-        $this->container->add(Bootstrap::class)->addArguments([RouterInterface::class, ControllerFactoryInterface::class]);
+        $this->container->add(ControllerFactoryInterface::class, DiControllerFactory::class)
+            ->addArgument($this->container);
+        $this->container->add(Bootstrap::class)
+            ->addArguments([RouterInterface::class, ControllerFactoryInterface::class]);
         $this->container->add(FrontController::class)
             ->addArguments([CallStackFactory::class, ErrorHandlerInterface::class, ResponseSenderInterface::class])
             ->addMethodCall("addMiddleware", [RequestMeta::class])
