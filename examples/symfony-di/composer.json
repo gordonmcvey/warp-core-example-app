@@ -1,7 +1,9 @@
 {
   "name": "gordonmcvey/warpcore-example-app-symfony",
   "description": "Warp Core example application (using Symfony DI for dependency injection)",
+  "type": "project",
   "license": "apache",
+  "version": "1.0.0",
   "authors": [
     {
       "name": "gordonmcvey",

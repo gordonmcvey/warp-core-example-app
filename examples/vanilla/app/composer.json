@@ -1,8 +1,9 @@
 {
   "name": "gordonmcvey/warpcore-example-app-vanilla",
-  "version": "1.0.0",
   "description": "Warp Core example application (with no DI container, all dependency injections are managed manually)",
+  "type": "project",
   "license": "apache",
+  "version": "1.0.0",
   "authors": [
     {
       "name": "gordonmcvey"

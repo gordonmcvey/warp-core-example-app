@@ -1,7 +1,9 @@
 {
   "name": "gordonmcvey/warpcore-example-app-php-di",
   "description": "Warp Core example application (using PHP-DI for dependency injection)",
+  "type": "project",
   "license": "apache",
+  "version": "1.0.0",
   "authors": [
     {
       "name": "gordonmcvey",
