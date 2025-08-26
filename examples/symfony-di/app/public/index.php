@@ -30,7 +30,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../");
-$dotenv->load();
+$dotenv->safeLoad();
 
 $dotenv->ifPresent("ERROR_REPORTING")->isInteger();
 error_reporting((int) $_ENV["ERROR_REPORTING"]);
