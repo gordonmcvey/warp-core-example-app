@@ -31,7 +31,7 @@ use gordonmcvey\WarpCore\ShutdownHandler;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../");
-$dotenv->load();
+$dotenv->safeLoad();
 
 $dotenv->required("APP_CONTROLLER_NAMESPACE_ROOT");
 $dotenv->ifPresent("DETAILED_ERROR_OUTPUT")->isBoolean();
