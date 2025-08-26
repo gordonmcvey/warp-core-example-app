@@ -9,14 +9,17 @@ COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 
-COPY ./app/src/ ./src
-COPY ./app/public ./public
+# Install just the dependencies for now
+# (see https://medium.com/@softius/faster-docker-builds-with-composer-install-b4d2b15d0fff)
 COPY ./app/composer.json ./
-
 RUN composer install  \
     --prefer-dist  \
     --no-dev  \
     --no-scripts  \
     --no-progress  \
-    --no-interaction  \
-    --optimize-autoloader
+    --no-interaction
+
+# Install the actual app
+COPY ./app/src/ ./src
+COPY ./app/public ./public
+RUN composer dump-autoload --optimize
