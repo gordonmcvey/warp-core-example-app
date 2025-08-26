@@ -9,9 +9,9 @@ COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 
-COPY ../../src ./src
-COPY ../../public ./public
-COPY ../../composer.json ./
+COPY ./app/src/ ./src
+COPY ./app/public ./public
+COPY ./app/composer.json ./
 
 RUN composer install  \
     --prefer-dist  \
