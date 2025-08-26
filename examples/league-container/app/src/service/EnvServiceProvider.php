@@ -49,7 +49,7 @@ class EnvServiceProvider extends AbstractServiceProvider implements BootableServ
     public function boot(): void
     {
         $dotenv = Dotenv::createImmutable($this->envDir);
-        $dotenv->load();
+        $dotenv->safeLoad();
 
         $dotenv->required(self::APP_CONTROLLER_NAMESPACE_ROOT);
         $dotenv->ifPresent(self::ERROR_REPORTING)->isInteger();
