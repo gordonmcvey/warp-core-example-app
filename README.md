@@ -8,7 +8,12 @@ You can run these applications directly from PHP's built-in web server (recommen
 
 ### Running with PHP's web server
 
-Once you've cloned the repo, `cd` into one of the sub-directories under `/examples` (for example `/examples/vanilla`).  Then configure, install dependencies, and run the PHP server from the `/public` subdirectory:
+Once you've cloned the repo, `cd` into one of the sub-directories under `/examples` and then into the `app` subdirectory of the example you've picked (for example `/examples/vanilla/app` to run the Vanilla example).  Then configure, install dependencies, and run the PHP server from the `/public` subdirectory:
+
+```shell
+# Replace "vanilla" with the example you want to run
+cd ./examples/vanilla/app
+```
 
 Setting up the environment is simply a matter of copying the `.env.example.*` file you wish to use as the basis of your config to `.env`.
 
@@ -29,6 +34,7 @@ composer install
 cd ./public
 php -S localhost:8000
 ```
+Your application will be available at [Localhost on port 8000](http://localhost:8000) (or whichever port you specify).
 
 ### Running from a web server
 
@@ -36,7 +42,14 @@ The specifics of running Warp Core from a web server such as Apache or Nginx wil
 
 ### Running from Docker
 
-Coming soon
+A `docker-compose.yaml` file has been provided for each example that will build Nginx and PHP-FPM containers in which the app will run.  
+
+To run the example you want to run, simply cd to the directory of the esample you want to run.  When you're ready, start your application by running:
+```shell
+docker compose up --build
+```
+
+Your application will be available at [Localhost on port 8000](http://localhost:8000).
 
 ## Example applications
 
