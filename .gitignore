@@ -14,4 +14,4 @@ Thumbs.db
 
 **/vendor/
 **/.env
-**/composer.lock
+/composer.lock
