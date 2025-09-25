@@ -11,7 +11,7 @@ WORKDIR /app
 
 # Install just the dependencies for now
 # (see https://medium.com/@softius/faster-docker-builds-with-composer-install-b4d2b15d0fff)
-COPY ./app/composer.json ./
+COPY ./app/composer.* ./
 RUN composer install  \
     --prefer-dist  \
     --no-dev  \

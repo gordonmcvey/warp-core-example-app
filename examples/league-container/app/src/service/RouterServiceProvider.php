@@ -20,16 +20,18 @@ declare(strict_types=1);
 
 namespace gordonmcvey\exampleapp\service;
 
+use gordonmcvey\exampleapp\controller\Health\EchoPayload;
+use gordonmcvey\exampleapp\controller\Health\Ping;
+use gordonmcvey\httpsupport\enum\Verbs;
 use gordonmcvey\WarpCore\interface\routing\RouterInterface;
-use gordonmcvey\WarpCore\interface\routing\RoutingStrategyInterface;
-use gordonmcvey\WarpCore\routing\PathNamespaceStrategy;
+use gordonmcvey\WarpCore\routing\RequestPathValidator;
 use gordonmcvey\WarpCore\routing\Router;
+use gordonmcvey\WarpCore\routing\StaticStrategy;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 
 class RouterServiceProvider extends AbstractServiceProvider
 {
     private const array PROVIDED = [
-        RoutingStrategyInterface::class,
         RouterInterface::class,
     ];
 
@@ -41,11 +43,17 @@ class RouterServiceProvider extends AbstractServiceProvider
     public function register(): void
     {
         $this->container
-            ->add(
-                RoutingStrategyInterface::class,
-                PathNamespaceStrategy::class,
-            )
-            ->addArgument(EnvServiceProvider::APP_CONTROLLER_NAMESPACE_ROOT)
+            ->add("PingRoute", StaticStrategy::class)
+            ->addArgument(["/health/ping" => Ping::class])
+            ->addArgument(Verbs::GET)
+            ->addArgument(Verbs::HEAD)
+        ;
+
+        $this->container
+            ->add("EchoPayloadRoute", StaticStrategy::class)
+            ->addArgument(["/health/echo-payload" => EchoPayload::class])
+            ->addArgument(Verbs::PUT)
+            ->addArgument(Verbs::POST)
         ;
 
         $this->container
@@ -53,7 +61,9 @@ class RouterServiceProvider extends AbstractServiceProvider
                 RouterInterface::class,
                 Router::class,
             )
-            ->addArgument(RoutingStrategyInterface::class)
+            ->addArgument(RequestPathValidator::class)
+            ->addArgument($this->container->get("PingRoute"))
+            ->addArgument($this->container->get("EchoPayloadRoute"))
         ;
     }
 }

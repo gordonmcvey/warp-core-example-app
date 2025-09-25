@@ -27,6 +27,7 @@ use gordonmcvey\httpsupport\enum\Verbs;
 use gordonmcvey\httpsupport\interface\request\RequestInterface;
 use gordonmcvey\httpsupport\interface\response\ResponseInterface;
 use gordonmcvey\httpsupport\response\Response;
+use gordonmcvey\WarpCore\exception\routing\MethodNotAllowed;
 use gordonmcvey\WarpCore\Exceptions\Routing;
 use gordonmcvey\WarpCore\interface\controller\RequestHandlerInterface;
 use gordonmcvey\WarpCore\interface\middleware\MiddlewareProviderInterface;
@@ -45,7 +46,7 @@ final class Ping implements RequestHandlerInterface, MiddlewareProviderInterface
     {
         if (!in_array($request->verb(), self::ALLOWED_METHODS)) {
             // @todo We need more exception types
-            throw new Routing("Method not allowed", ClientErrorCodes::METHOD_NOT_ALLOWED->value);
+            throw new MethodNotAllowed("Method not allowed");
         }
 
         return new Response(
