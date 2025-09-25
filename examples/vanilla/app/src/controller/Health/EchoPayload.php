@@ -27,7 +27,8 @@ use gordonmcvey\httpsupport\enum\Verbs;
 use gordonmcvey\httpsupport\interface\request\RequestInterface;
 use gordonmcvey\httpsupport\interface\response\ResponseInterface;
 use gordonmcvey\httpsupport\response\Response;
-use gordonmcvey\WarpCore\Exceptions\Routing;
+use gordonmcvey\WarpCore\exception\Routing;
+use gordonmcvey\WarpCore\exception\routing\MethodNotAllowed;
 use gordonmcvey\WarpCore\interface\controller\RequestHandlerInterface;
 use JsonException;
 
@@ -39,18 +40,18 @@ final readonly class EchoPayload implements RequestHandlerInterface
     ];
 
     /**
-     * @throws Routing
+     * @throws MethodNotAllowed
      */
     public function dispatch(RequestInterface $request): ResponseInterface
     {
         if (!in_array($request->verb(), self::ALLOWED_METHODS)) {
-            // @todo We need more exception types
-            throw new Routing("Method not allowed", ClientErrorCodes::METHOD_NOT_ALLOWED->value);
+            throw new MethodNotAllowed("Method not allowed");
         }
 
         try {
             $payload = json_decode($request->body(), flags: JSON_THROW_ON_ERROR);
         } catch (JsonException $e) {
+            // @todo We need to add an exception set for client errors
             throw new Routing("Payload is not valid JSON", ClientErrorCodes::BAD_REQUEST->value, $e);
         }
 

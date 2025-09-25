@@ -21,10 +21,12 @@ declare(strict_types=1);
 $received = new DateTimeImmutable();
 
 use Dotenv\Dotenv;
+use gordonmcvey\exampleapp\controller\Health\EchoPayload;
 use gordonmcvey\exampleapp\controller\Health\Ping;
 use gordonmcvey\exampleapp\middleware\ProcessedTime;
 use gordonmcvey\exampleapp\middleware\RequestMeta;
 use gordonmcvey\httpsupport\enum\factory\StatusCodeFactory;
+use gordonmcvey\httpsupport\enum\Verbs;
 use gordonmcvey\httpsupport\interface\request\RequestInterface;
 use gordonmcvey\httpsupport\request\payload\JsonPayloadHandler;
 use gordonmcvey\httpsupport\request\Request;
@@ -35,8 +37,9 @@ use gordonmcvey\WarpCore\ErrorToException;
 use gordonmcvey\WarpCore\FrontController;
 use gordonmcvey\WarpCore\interface\controller\RequestHandlerInterface;
 use gordonmcvey\WarpCore\middleware\CallStackFactory;
-use gordonmcvey\WarpCore\routing\PathNamespaceStrategy;
+use gordonmcvey\WarpCore\routing\RequestPathValidator;
 use gordonmcvey\WarpCore\routing\Router;
+use gordonmcvey\WarpCore\routing\StaticStrategy;
 use gordonmcvey\WarpCore\ShutdownHandler;
 
 require_once __DIR__ . "/../vendor/autoload.php";
@@ -72,7 +75,11 @@ $dotenv->required("APP_CONTROLLER_NAMESPACE_ROOT");
     ->addMiddleware(new RequestMeta($received))
     ->bootstrap(
         function (RequestInterface $request): RequestHandlerInterface {
-            $router = new Router(new PathNamespaceStrategy($_ENV["APP_CONTROLLER_NAMESPACE_ROOT"]));
+            $router = new Router(
+                new RequestPathValidator(),
+                new StaticStrategy(["/health/ping" => Ping::class], Verbs::GET, Verbs::HEAD),
+                new StaticStrategy(["/health/echo-payload" => EchoPayload::class], Verbs::POST, Verbs::PUT)
+            );
             $controller = (new ControllerFactory())->make($router->route($request));
             $controller instanceof Ping && $controller->addMiddleware(new ProcessedTime());
 
