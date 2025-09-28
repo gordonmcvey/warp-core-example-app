@@ -1,0 +1,11 @@
+services:
+  web_server:
+    build:
+      context: ../../build/webserver
+      dockerfile: ../../build/webserver/Dockerfile
+    ports:
+      - "8000:80"
+  app_runner:
+    build:
+      dockerfile: ./Dockerfile
+    env_file: ./app/.env.example.dev

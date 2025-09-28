@@ -1,0 +1,32 @@
+{
+  "name": "gordonmcvey/warpcore-example-app-vanilla",
+  "description": "Warp Core example application (with no DI container, all dependency injections are managed manually)",
+  "type": "project",
+  "license": "apache",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "gordonmcvey"
+    }
+  ],
+  "require": {
+    "php": ">=8.3.0",
+    "gordonmcvey/warp-core-php": "^3.0.0rc1",
+    "vlucas/phpdotenv": "^5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "gordonmcvey\\exampleapp\\": "src"
+    }
+  },
+  "repositories": [
+    {
+      "type": "github",
+      "url": "git@github.com:gordonmcvey/warp-core-php.git"
+    },
+    {
+      "type": "github",
+      "url": "git@github.com:gordonmcvey/httpsupport.git"
+    }
+  ]
+}
